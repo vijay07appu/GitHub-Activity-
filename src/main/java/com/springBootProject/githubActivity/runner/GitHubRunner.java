@@ -5,6 +5,7 @@ import com.springBootProject.githubActivity.service.GithubActivitySevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.View;
 import reactor.core.publisher.Mono;
 import tools.jackson.databind.ObjectMapper;
 
@@ -17,6 +18,8 @@ public class GitHubRunner implements CommandLineRunner {
     GithubActivitySevice githubActivitySevice;
 
     private ObjectMapper mapper=new ObjectMapper();
+    @Autowired
+    private View error;
 
     @Override
     public void run(String... args) throws Exception {
@@ -40,7 +43,7 @@ public class GitHubRunner implements CommandLineRunner {
 
 
 
-        });
+        },error->{System.out.println("Error fetching details"+error.getMessage());});
 
     }
 }
